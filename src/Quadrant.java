@@ -4,7 +4,6 @@
 public class Quadrant {
 
     public char[][] quadrant;
-    Color[][] colors;
 
     public Quadrant() {
         this.quadrant = new char[][]{
@@ -13,11 +12,6 @@ public class Quadrant {
                 {'│', '*', '*', '*', '│'},
                 {'│', '*', '*', '*', '│'},
                 {'└', '─', '─', '─', '┘'}
-        };
-        colors = new Color[][]{
-                {Color.None, Color.None, Color.None},
-                {Color.None, Color.None, Color.None},
-                {Color.None, Color.None, Color.None}
         };
     }
 }

@@ -16,18 +16,22 @@ public class Game {
             "                            3 4                4 5 6                            c(clockwise)\n" +
             "                                               7 8 9                   cc(counter-clockwise)\n";
 
-    public Game(String firstPlayerName, String secondPlayerName) {
+    public Game() {
+        Outer.printMessage("Для начала введите имена игроков\nИмя первого игрока:");
+        this.firstPlayerName = Inter.getValue();
+        Outer.printMessage("Имя второго игрока:");
+        this.secondPlayerName = Inter.getValue();
         this.map = new Map();
-        this.firstPlayerName = String.valueOf(firstPlayerName.toCharArray());
-        this.secondPlayerName = String.valueOf(secondPlayerName.toCharArray());
     }
 
     public void run() {
-        Outer.printMap(map);
-        Outer.printMessage(String.format(messageFormat,firstPlayerName));
-        String message = Inter.getValue();
-        Message mess = MessageHandler.convertLine(message);
-
+        byte playerTurn = 1;
+        while (true) {
+            Outer.printMap(map);
+            Outer.printMessage(String.format(messageFormat, firstPlayerName));
+            String message = Inter.getValue();
+            Message mess = MessageHandler.convertLine(message);
+        }
     }
 
 }

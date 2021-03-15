@@ -3,7 +3,7 @@ public class Message {
     public int qNumber;
     public int pNumber;
     public Clockwise clockwise;
-    public String message;
+    public String message = null;
 
     public Message(int qNumber, int pNumber, Clockwise clockwise) {
         this.clockwise = clockwise;

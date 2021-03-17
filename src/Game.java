@@ -43,10 +43,18 @@ public class Game {
                 continue;
             }
             TurnResult turnResult = Turn.getTurnResult(mess,map,currentPlayer,playerTurn % 2 != 1 ? firstPlayer : secondPlayer);
+            if(turnResult.isCurrentPlayerHaveRow)
+                currentPlayer.haveWinningRow=true;
             if(turnResult.isReal) playerTurn++;
-            if(turnResult.isCurrentPlayerHaveRow) ;//todo
+            if(firstPlayer.haveWinningRow || secondPlayer.haveWinningRow){
+                if(firstPlayer.haveWinningRow && secondPlayer.haveWinningRow)
+                    Outer.printlnMessage("Победила дружба!!!");
+                else if(firstPlayer.haveWinningRow)
+                    Outer.printlnMessage(String.format("Победил %s",firstPlayer));
+                else Outer.printlnMessage(String.format("Победил %s",secondPlayer));
+                return;
+            }
         }
     }
-
 
 }

@@ -16,7 +16,6 @@ public class Game {
             "1-число это номер квадранта 1 2 2-номер клетки 1 2 3 и третий параметр это сторона вращения:\n" +
             "                            3 4                4 5 6                            c(clockwise)\n" +
             "                                               7 8 9                   cc(counter-clockwise)\n";
-    private List<Integer> unRotatedQuadrants;
 
     public Game(Player fp, Player sp) {
         firstPlayer = fp;

@@ -1,7 +1,7 @@
 public class Message {
 
-    public int qNumber;
-    public int pNumber;
+    public int qNumber=0;
+    public int pNumber=0;
     public Clockwise clockwise;
     public String message = null;
 

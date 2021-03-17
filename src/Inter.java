@@ -4,8 +4,10 @@ import java.util.Scanner;
  */
 public class Inter {
 
+    private final static Scanner scanner = new Scanner(System.in);
+
     public static String getValue() {
-        return new Scanner(System.in).nextLine();
+        return scanner.nextLine();
     }
 
 }

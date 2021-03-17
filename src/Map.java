@@ -1,15 +1,16 @@
+import java.util.HashMap;
+
 /**
  * Хранит в себе всю карту игры
  */
 public class Map {
 
-    Quadrant[][] quadrants;
+    HashMap<Integer, Quadrant> quadrantHashMap = new HashMap<>();
 
     public Map() {
-        quadrants = new Quadrant[][]{
-                {new Quadrant(), new Quadrant()},
-                {new Quadrant(), new Quadrant()}
-        };
+        for (int i = 0; i < 4; i++) {
+            quadrantHashMap.put(i, new Quadrant());
+        }
     }
 
 }

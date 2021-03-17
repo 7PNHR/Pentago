@@ -1,17 +1,16 @@
+import java.util.HashMap;
+
 /**
  * Хранит в себе один из 4 квадрантов
  */
 public class Quadrant {
 
-    public char[][] quadrant;
+    HashMap<Integer,String> lines = new HashMap<>();
 
     public Quadrant() {
-        this.quadrant = new char[][]{
-                {'┌', '─', '─', '─', '┐'},
-                {'│', '*', '*', '*', '│'},
-                {'│', '*', '*', '*', '│'},
-                {'│', '*', '*', '*', '│'},
-                {'└', '─', '─', '─', '┘'}
-        };
+        for (int i = 0; i < 3; i++) {
+            lines.put(i,"***");
+        }
     }
+
 }

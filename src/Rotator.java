@@ -1,38 +1,25 @@
+import java.util.HashMap;
+
 /**
  * Вращает Quadrant
  */
+
 public class Rotator {
 
-    public static Quadrant rotate(Quadrant quadrant, Clockwise clockwise){
-        return clockwise==Clockwise.CLOCKWISE?clockwiseRotate(quadrant):counterClockwiseRotate(quadrant);
+    public static void rotate(Quadrant quadrant, Clockwise clockwise) {
+        HashMap<Integer, String> newLines = new HashMap<>();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                stringBuilder.append(quadrant.lines
+                        .get(clockwise == Clockwise.CLOCKWISE ? 2 - j : j)
+                        .charAt(clockwise == Clockwise.CLOCKWISE ? i : 2 - i));
+            }
+            newLines.put(i, stringBuilder.toString());
+            stringBuilder = new StringBuilder();
+        }
+        quadrant.lines = newLines;
     }
 
-    private static Quadrant clockwiseRotate(Quadrant quadrant){
-        char first = quadrant.quadrant[1][1];
-        quadrant.quadrant[1][1]=quadrant.quadrant[3][1];
-        quadrant.quadrant[3][1]=quadrant.quadrant[3][3];
-        quadrant.quadrant[3][3]=quadrant.quadrant[1][3];
-        quadrant.quadrant[1][3]=first;
-        first=quadrant.quadrant[1][2];
-        quadrant.quadrant[1][2]=quadrant.quadrant[2][1];
-        quadrant.quadrant[2][1]=quadrant.quadrant[3][2];
-        quadrant.quadrant[3][2]=quadrant.quadrant[2][3];
-        quadrant.quadrant[2][3]=first;
-        return null;
-    }
-
-    private static Quadrant counterClockwiseRotate(Quadrant quadrant){
-        char first = quadrant.quadrant[1][1];
-        quadrant.quadrant[1][1]=quadrant.quadrant[1][3];
-        quadrant.quadrant[1][3]=quadrant.quadrant[3][3];
-        quadrant.quadrant[3][3]=quadrant.quadrant[3][1];
-        quadrant.quadrant[3][1]=first;
-        first=quadrant.quadrant[1][2];
-        quadrant.quadrant[1][2]=quadrant.quadrant[2][3];
-        quadrant.quadrant[2][3]=quadrant.quadrant[3][2];
-        quadrant.quadrant[3][2]=quadrant.quadrant[2][1];
-        quadrant.quadrant[2][1]=first;
-        return null;
-    }
 
 }

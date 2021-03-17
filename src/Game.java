@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Инициализирует объекты других классов, необходимых для игры
  * и цикличит игру
@@ -6,32 +8,45 @@
 public class Game {
 
     private final Map map;
-    private final String firstPlayerName;
-    private final String secondPlayerName;
+    private final Player firstPlayer;
+    private final Player secondPlayer;
     private static final String messageFormat = "%s, ваш ход, если вдруг забыли формат хода(rules):\n";
-
     private static final String rules = "Правила:\n" +
             "Всего 3 параметра:\n" +
             "1-число это номер квадранта 1 2 2-номер клетки 1 2 3 и третий параметр это сторона вращения:\n" +
             "                            3 4                4 5 6                            c(clockwise)\n" +
             "                                               7 8 9                   cc(counter-clockwise)\n";
+    private List<Integer> unRotatedQuadrants;
 
-    public Game() {
-        Outer.printMessage("Для начала введите имена игроков\nИмя первого игрока:");
-        this.firstPlayerName = Inter.getValue();
-        Outer.printMessage("Имя второго игрока:");
-        this.secondPlayerName = Inter.getValue();
+    public Game(Player fp, Player sp) {
+        firstPlayer = fp;
+        secondPlayer = sp;
         this.map = new Map();
     }
 
     public void run() {
         byte playerTurn = 1;
+        boolean isRulesMustBeShown = false;
         while (true) {
+            Player currentPlayer = playerTurn % 2 == 1 ? firstPlayer : secondPlayer;
             Outer.printMap(map);
-            Outer.printMessage(String.format(messageFormat, firstPlayerName));
+            if (isRulesMustBeShown) {
+                Outer.printlnMessage(rules);
+                isRulesMustBeShown = false;
+            }
+            Outer.printMessage(String.format(messageFormat, currentPlayer.getName()));
             String message = Inter.getValue();
             Message mess = MessageHandler.convertLine(message);
+            if (!Checker.isMessageNormal(mess)) {
+                if (mess.message.equals("rules"))
+                    isRulesMustBeShown = true;
+                continue;
+            }
+            TurnResult turnResult = Turn.getTurnResult(mess,map,currentPlayer,playerTurn % 2 != 1 ? firstPlayer : secondPlayer);
+            if(turnResult.isReal) playerTurn++;
+            if(turnResult.isCurrentPlayerHaveRow) ;//todo
         }
     }
+
 
 }

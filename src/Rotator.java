@@ -11,11 +11,12 @@ public class Rotator {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                stringBuilder.append(quadrant.lines
-                        .get(clockwise == Clockwise.CLOCKWISE ? 2 - j : j)
-                        .charAt(clockwise == Clockwise.CLOCKWISE ? i : 2 - i));
+                stringBuilder.append(quadrant.lines.get(2 - j).charAt(i));
             }
-            newLines.put(i, stringBuilder.toString());
+            if(clockwise==Clockwise.CLOCKWISE)
+                newLines.put(i , stringBuilder.toString());
+            else
+                newLines.put(2-i , stringBuilder.reverse().toString());
             stringBuilder = new StringBuilder();
         }
         quadrant.lines = newLines;

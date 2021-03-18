@@ -11,9 +11,9 @@ public class Game {
     private static final String messageFormat = "%s, ваш ход, если вдруг забыли формат хода(rules):\n";
     private static final String rules = "Правила:\n" +
             "Всего 3 параметра:\n" +
-            "1-число это номер квадранта 1 2 2-номер клетки 1 2 3 и третий параметр это сторона вращения:\n" +
-            "                            3 4                4 5 6                            c(clockwise)\n" +
-            "                                               7 8 9                   cc(counter-clockwise)\n";
+            "1-число это номер квадранта 1 2 2-номер клетки 1 2 3 третий-номер вращаемого квадранта и 4 параметр это сторона вращения:\n" +
+            "                            3 4                4 5 6                                                         c(clockwise)\n" +
+            "                                               7 8 9                                                cc(counter-clockwise)\n";
 
     public Game(Player fp, Player sp) {
         firstPlayer = fp;
@@ -39,16 +39,13 @@ public class Game {
                     isRulesMustBeShown = true;
                 continue;
             }
-            TurnResult turnResult = Turn.getTurnResult(mess,map,currentPlayer,playerTurn % 2 != 1 ? firstPlayer : secondPlayer);
-            if(turnResult.isCurrentPlayerHaveRow)
-                currentPlayer.haveWinningRow=true;
-            if(turnResult.isReal) playerTurn++;
-            if(firstPlayer.haveWinningRow || secondPlayer.haveWinningRow){
-                if(firstPlayer.haveWinningRow && secondPlayer.haveWinningRow)
-                    Outer.printlnMessage("Победила дружба!!!");
-                else if(firstPlayer.haveWinningRow)
-                    Outer.printlnMessage(String.format("Победил %s",firstPlayer));
-                else Outer.printlnMessage(String.format("Победил %s",secondPlayer));
+            TurnResult turnResult = Turn.getTurnResult(mess, map, currentPlayer, playerTurn % 2 != 1 ? firstPlayer : secondPlayer);
+            if (turnResult.isCurrentPlayerHaveRow)
+                currentPlayer.haveWinningRow = true;
+            if (turnResult.isReal) playerTurn++;
+            String line = Player.checkWinAndGetPlayer(firstPlayer,secondPlayer,currentPlayer);
+            if(line!=null){
+                Outer.printlnMessage(line);
                 return;
             }
         }

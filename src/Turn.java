@@ -5,12 +5,12 @@ public class Turn {
         String line = quadrant.lines.get((message.pNumber - 1) / 3);
         if (line.charAt((message.pNumber - 1) % 3) == '*') {
             char[] newLine = line.toCharArray();
-            newLine[(message.pNumber - 1) % 3] = currentPlayer.getSymbol().charAt(0);
+            newLine[(message.pNumber - 1) % 3] = currentPlayer.getSymbol();
             quadrant.lines.put((message.pNumber - 1) / 3, String.valueOf(newLine));
             boolean value = Checker.isPlayerHaveWinRow(map, currentPlayer.getSymbol());
             if(anotherPlayer.haveWinningRow){}
             else{
-                Rotator.rotate(quadrant,message.clockwise);
+                Rotator.rotate(map.quadrantHashMap.get(message.qNumberToRotate - 1),message.clockwise);
             }
             return new TurnResult(true, value);
         } else

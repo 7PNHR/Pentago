@@ -2,12 +2,14 @@ public class Message {
 
     public int qNumber=0;
     public int pNumber=0;
+    public int qNumberToRotate=0;
     public Clockwise clockwise;
     public String message = null;
 
-    public Message(int qNumber, int pNumber, Clockwise clockwise) {
+    public Message(int qNumber, int pNumber,int qNumberToRotate, Clockwise clockwise) {
         this.clockwise = clockwise;
         this.pNumber = pNumber;
+        this.qNumberToRotate=qNumberToRotate;
         this.qNumber = qNumber;
     }
 

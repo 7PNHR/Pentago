@@ -1,12 +1,10 @@
-import java.util.List;
-
 public class Player {
 
     private final String name;
-    private final String symbol;
+    private final char symbol;
     public boolean haveWinningRow;
 
-    public Player(String playerName, String playerSymbol) {
+    public Player(String playerName, char playerSymbol) {
         this.name = playerName;
         this.symbol = playerSymbol;
     }
@@ -15,8 +13,20 @@ public class Player {
         return name;
     }
 
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
+    }
+
+    public static String checkWinAndGetPlayer(Player firstPlayer, Player secondPlayer, Player currentPlayer){
+        if (firstPlayer.haveWinningRow || secondPlayer.haveWinningRow) {
+            if (firstPlayer.haveWinningRow && secondPlayer.haveWinningRow)
+                return "Победила дружба!!!";
+            else if (firstPlayer.haveWinningRow && currentPlayer!=firstPlayer)
+                return(String.format("Победил %s", firstPlayer.getName()));
+            else if(secondPlayer.haveWinningRow && currentPlayer!=secondPlayer)
+                return(String.format("Победил %s", secondPlayer.getName()));
+        }
+        return null;
     }
 
 }
